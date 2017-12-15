@@ -1,0 +1,32 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+
+<dom-module id="aikatsu-app">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+    </style>
+    <h2>Hello [[prop1]]!</h2>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class AikatsuApp extends Polymer.Element {
+      static get is() { return 'aikatsu-app'; }
+      static get properties() {
+        return {
+          prop1: {
+            type: String,
+            value: 'aikatsu-app'
+          }
+        };
+      }
+    }
+
+    window.customElements.define(AikatsuApp.is, AikatsuApp);
+  </script>
+</dom-module>
