@@ -99,3 +99,7 @@ ENV/
 
 # mypy
 .mypy_cache/
+
+.idea/
+bower_compenents/
+db.sqlite3
