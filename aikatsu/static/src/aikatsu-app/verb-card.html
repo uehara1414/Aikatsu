@@ -1,0 +1,47 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/paper-card/paper-card.html">
+
+<dom-module id="verb-card">
+  <template>
+    <style>
+      :host {
+        display: table;
+        width: 160px;
+        height: 240px;
+      }
+
+      paper-card {
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+
+    </style>
+    <paper-card>
+      <p>単語</p>
+    </paper-card>
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class VerbCard extends Polymer.Element {
+      static get is() {
+        return 'verb-card';
+      }
+
+      static get properties() {
+        return {
+          word: {
+            type: String,
+            value: ''
+          }
+        };
+      }
+    }
+
+    window.customElements.define(VerbCard.is, VerbCard);
+  </script>
+</dom-module>
