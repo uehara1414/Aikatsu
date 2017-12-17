@@ -7,9 +7,3 @@ from .views import urlpatterns
 urlpatterns = [
     url(r'^api/', include(urlpatterns)),
 ]
-
-
-if settings.DEBUG:
-    urlpatterns += [
-        url(r'', serve, kwargs={'path': 'index.html'}),
-    ]

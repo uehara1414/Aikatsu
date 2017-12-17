@@ -3,16 +3,14 @@ from django.conf.urls import url
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
 
+from aikatsu.models import Verb
+
 
 @api_view(['GET'])
 def hello_world(request):
     """## Some documentations"""
-    return Response({'results': [
-        '豪華にする',
-        'モチベーションをあげる',
-        'すぐに試せる',
-        '着る'
-    ] * 5})
+    verbs = Verb.objects.all()
+    return Response({'results': [verb.word for verb in verbs]})
 
 
 urlpatterns = [
