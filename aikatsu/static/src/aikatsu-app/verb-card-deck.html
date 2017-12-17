@@ -1,0 +1,64 @@
+<link rel="import" href="../../bower_components/polymer/polymer-element.html">
+<link rel="import" href="../../bower_components/iron-ajax/iron-ajax.html">
+<link rel="import" href="verb-card.html">
+
+<dom-module id="verb-card-deck">
+  <template>
+    <style>
+      :host {
+        display: inline-flex;
+      }
+
+      verb-card {
+        margin-right: -158px;
+      }
+
+    </style>
+
+    <iron-ajax
+            auto
+            url="/api/get_verbs"
+            handle-as="json"
+            on-response="handleResponse"
+            debounce-duration="300"></iron-ajax>
+
+    <template is="dom-repeat" items="[[words]]" as="word">
+      <verb-card word="[[word]]" on-click="drawCard"></verb-card>
+    </template>
+
+  </template>
+
+  <script>
+    /**
+     * @customElement
+     * @polymer
+     */
+    class VerbCardDeck extends Polymer.Element {
+      static get is() {
+        return 'verb-card-deck';
+      }
+
+      static get properties() {
+        return {
+          words: {
+            type: Array,
+            value: []
+          }
+        };
+      }
+
+      handleResponse(data) {
+        var results = data.detail.response.results;
+        for (let i=0; i < results.length; i++) {
+          this.push('words', results[i]);
+        }
+      }
+
+      drawCard() {
+        return this.pop('words');
+      }
+    }
+
+    window.customElements.define(VerbCardDeck.is, VerbCardDeck);
+  </script>
+</dom-module>
