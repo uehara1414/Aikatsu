@@ -103,3 +103,10 @@ ENV/
 .idea/
 bower_components/
 db.sqlite3
+
+aikatsu.conf
+aikatsu.service
+deploy.retry
+hosts
+run_gunicorn.sh
+deploy.yml
