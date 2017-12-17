@@ -110,3 +110,5 @@ deploy.retry
 hosts
 run_gunicorn.sh
 deploy.yml
+
+.env.prod
