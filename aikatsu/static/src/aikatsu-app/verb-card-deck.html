@@ -6,25 +6,34 @@
   <template>
     <style>
       :host {
+        display: block;
+      }
+
+      #card-deck {
         display: inline-flex;
+        margin-left: 160px;
       }
 
       verb-card {
-        margin-right: -158px;
+        margin-left: -158px;
       }
+
 
     </style>
 
     <iron-ajax
+            id="ironAjax"
             auto
             url="/api/get_verbs"
             handle-as="json"
             on-response="handleResponse"
             debounce-duration="300"></iron-ajax>
 
-    <template is="dom-repeat" items="[[words]]" as="word">
-      <verb-card word="[[word]]" on-click="drawCard"></verb-card>
-    </template>
+    <div id="card-deck">
+      <template is="dom-repeat" items="[[words]]" as="word">
+        <verb-card word="[[word]]" on-click="drawCard"></verb-card>
+      </template>
+    </div>
 
   </template>
 
@@ -47,15 +56,27 @@
         };
       }
 
+      static get observers() {
+        return [
+          '_wordsChanged(words.*)'
+        ]
+      }
+
       handleResponse(data) {
         var results = data.detail.response.results;
-        for (let i=0; i < results.length; i++) {
+        for (let i = 0; i < results.length; i++) {
           this.push('words', results[i]);
         }
       }
 
       drawCard() {
         return this.pop('words');
+      }
+
+      _wordsChanged(words) {
+        if (this.words.length < 2) {
+          this.$.ironAjax.generateRequest();
+        }
       }
     }
 
